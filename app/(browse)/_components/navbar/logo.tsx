@@ -12,8 +12,8 @@ const font = Poppins({
 export const Logo = () => {
   return (
     <Link href="/" className="flex flex-row items-center gap-x-4">
-      <div className="hidden lg:flex items-center gap-x-4 hover:opacity-75 transition"> 
-        <div className="rounded-full p1">
+      <div className="flex items-center gap-x-4 hover:opacity-75 transition"> 
+        <div className="rounded-full p-1 mr-12 lg:mr-0 shrink-0 lg:shrink">
           <Image 
             src={logo}
             alt="logo"
@@ -22,7 +22,10 @@ export const Logo = () => {
           />
         </div>
 
-        <div className={cn(font.className)}>
+        <div className={cn(
+          "hidden lg:block", 
+          font.className
+        )}>
           <p className="text-lg font-semibold">Lauda</p>
           <p className="text-xs text-muted-foreground">let's praise</p>
         </div>

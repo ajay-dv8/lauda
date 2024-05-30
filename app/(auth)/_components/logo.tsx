@@ -11,7 +11,7 @@ const font = Poppins({
 export const Logo = () => {
   return (
     <div className="flex flex-col item-center gap-y-4">
-      <div className="bg-white rounded-ful p-1">
+      <div className="rounded-ful p-1">
         <Image 
           alt=""
           src={logo}
@@ -28,7 +28,7 @@ export const Logo = () => {
           Lauda
         </p>
 
-        <p className= "text-sm text-muted">
+        <p className= "text-sm text-muted-foreground">
           let&apos;s praise
         </p>
       </div>
