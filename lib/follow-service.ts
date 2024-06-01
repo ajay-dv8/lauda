@@ -67,6 +67,7 @@ export const followUser = async (id: string) => {
     },
   });
 
+  // check if the user exists "already being followed" 
   if (existingFollow) {
     throw new Error ("Already following user");
   }
@@ -84,5 +85,57 @@ export const followUser = async (id: string) => {
   });
 
   return follow;
-
 }
+
+
+
+
+
+
+// UNFOLLOW USER
+
+export const unfollowUser = async (id: string) => {
+  const self = await getSelf();
+  
+  const otherUser = await db.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  // throw an error if the user you are trying to unfollow does not exist  
+  if (!otherUser) {
+    throw new Error("User not found");
+  }
+
+  // throw an error if the user you are trying to unfollow is yourself 
+  if (otherUser.id === self.id) {
+    throw new Error("Cannot unfollow yourself");
+  }
+
+  // check if user follows the user they are trying to unfollow
+  const existingFollow = await db.follow.findFirst({
+    where: {
+      followerId: self.id,
+      followingId: otherUser.id,
+    },
+  });
+
+  // throw an error if the follow relationship does not exist
+  if (!existingFollow) {
+    throw new Error("Not following this user");
+  }
+
+  // delete the existing follow 
+  const follow = await db.follow.delete({
+    where: {
+      id: existingFollow.id,
+    },
+    include: {
+      following: true,
+      follower: true,
+    },
+  });
+
+  return follow;
+};

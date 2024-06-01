@@ -5,14 +5,14 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" 
 }
 
 datasource db {
   provider     = "postgresql"
   url          = env("DATABASE_URL")
   directUrl    = env("DIRECT_URL")
-  // relationMode = "prisma"
+  relationMode = "prisma" 
 }
 
 model User {
@@ -20,26 +20,26 @@ model User {
   username        String   @unique
   imageUrl        String   @db.Text
   externalUserId  String   @unique
-  bio             String?  @db.Text @default("")
+  bio             String?  @db.Text @default("") //remove default after testing
   phone           String?  @unique
 
   following       Follow[]  @relation("Following")
   followedBy      Follow[]  @relation("FollowedBy")
 
   createdAt       DateTime  @default(now())
-  udatedAt        DateTime  @updatedAt
+  updatedAt        DateTime  @updatedAt
 }
 
 model Follow {
-  id  String  @id @default(uuid())
-  followerId String
-  followingId String
+  id             String  @id @default(uuid())
+  followerId     String
+  followingId    String
 
-  follower User @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
-  following User @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+  follower       User  @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
+  following      User  @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
   
   @@unique([followerId, followingId])
   @@index([followerId])

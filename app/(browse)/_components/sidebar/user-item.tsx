@@ -60,9 +60,9 @@ export const UserItem = ({
           )}
 
           {/* Show liveBadge if user isLive and sidebar not collapsed */}
-          {!collapsed && isLive && (
+          {/* {!collapsed && isLive && (
             <LiveBadge className="ml-auto"/>
-          )}
+          )} */}
         </div>
       </Link>
     </Button>
