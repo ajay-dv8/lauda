@@ -22,8 +22,7 @@ export const UserItem = ({
   isLive,
 }: UserItemProps) => {
 
-  const pathname = usePathname();
-
+  const pathname = usePathname(); 
   const { collapsed } = useSidebar((state) => state);
 
   const href = `/${username}`;
@@ -48,7 +47,7 @@ export const UserItem = ({
           <UserAvatar 
             imageUrl={imageUrl}
             username={username}
-            isLive={isLive}
+            // isLive={isLive}
             // showBadge
           />
 
@@ -60,9 +59,9 @@ export const UserItem = ({
           )}
 
           {/* Show liveBadge if user isLive and sidebar not collapsed */}
-          {/* {!collapsed && isLive && (
+          {!collapsed && isLive && (
             <LiveBadge className="ml-auto"/>
-          )} */}
+          )}
         </div>
       </Link>
     </Button>
