@@ -34,13 +34,23 @@ export const getRecommended = async () => {
               },
             },
           },
+          // Dont add a users blocking me to the recommended list
+          {
+            NOT: {
+              blocking: {
+                some: {
+                  blockedId: userId,
+                },
+              },
+            },  
+          },
         ],
       },
-
       orderBy: {
         createdAt: "desc"
       }
     })
+
   } else {
     users = await db.user.findMany({
       orderBy: {

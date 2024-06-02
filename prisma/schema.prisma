@@ -23,8 +23,13 @@ model User {
   bio             String?  @db.Text @default("") //remove default after testing
   phone           String?  @unique
 
+  // relation for follow
   following       Follow[]  @relation("Following")
   followedBy      Follow[]  @relation("FollowedBy")
+
+  // relation for block
+  blockedBy       Block[]   @relation("BlockedBy")
+  blocking        Block[]   @relation("Blocking")
 
   createdAt       DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
@@ -44,4 +49,21 @@ model Follow {
   @@unique([followerId, followingId])
   @@index([followerId])
   @@index([followingId])
+}
+
+
+model Block {
+  id             String  @id @default(uuid())
+  blockerId      String
+  blockedId      String
+
+  blocker        User  @relation(name: "Blocking", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked        User  @relation(name: "BlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
 }
