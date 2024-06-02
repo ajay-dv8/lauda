@@ -28,7 +28,8 @@ export const Actions = async () => {
             className="text-muted-foreground hover:text-primary"
             asChild
           >
-            <Link href={`/u/${user.username}`}>
+            {/* link to creator dashboard page */}
+            <Link href={`/user/${user.username}`}>
               <Clapperboard className="w-5 h-5 lg:mr-2"/>
 
               <span className="hidden lg:block">
