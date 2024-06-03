@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js" 
+  // previewFeatures = ["fullTextSearch", "fullTextIndex"] //to enable fulltext search on the name stream model, to aloow stream to be searchable
 }
 
 datasource db {
@@ -31,8 +32,35 @@ model User {
   blockedBy       Block[]   @relation("BlockedBy")
   blocking        Block[]   @relation("Blocking")
 
+  stream          Stream?
+
   createdAt       DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  updatedAt       DateTime  @updatedAt
+}
+
+model Stream {
+  id              String  @id @default(uuid())
+  name            String  @db.Text
+  thumbnailUrl    String? @db.Text
+
+  ingressId       String? @unique //for connecting to a streaming software
+  serverUrl       String? @db.Text //this will come from the ingress creation
+  streamKey       String? @db.Text //this will come from the ingress creation
+
+  isLive              Boolean  @default(false)
+  isChatEnabled       Boolean  @default(true)
+  isChatDelayed       Boolean  @default(false)
+  isChatFollowersOnly Boolean  @default(false)
+
+  userId          String  @unique
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([ingressId])
+  // @@fulltext([name]) //make stream searchable by name // not required by te supabase postgress connector
 }
 
 model Follow {
