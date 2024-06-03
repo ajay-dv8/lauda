@@ -19,22 +19,22 @@ export const Navigation = () => {
   const routes = [
     {
       label: "Stream",
-      href: `/user/${user?.username}`, 
+      href: `/u/${user?.username}`, 
       icon: Fullscreen,
     },
     {
       label: "Keys",
-      href: `/user/${user?.username}/keys`, 
+      href: `/u/${user?.username}/keys`, 
       icon: KeyRound,
     },
     {
       label: "Chat",
-      href: `/user/${user?.username}/chat`, 
+      href: `/u/${user?.username}/chat`, 
       icon: MessageSquare,
     },
     {
       label: "Community",
-      href: `/user/${user?.username}/community`, 
+      href: `/u/${user?.username}/community`, 
       icon: Users,
     },
   ];
