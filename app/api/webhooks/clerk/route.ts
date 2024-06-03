@@ -64,6 +64,14 @@ export async function POST(req: Request) {
         externalUserId: payload.data.id,
         username: payload.data.username,
         imageUrl: payload.data.image_url,
+
+        // create stream when a new user is created
+        // TODO: latter streams will be added to organizations 
+        stream: {
+          create: { 
+            name: `${payload.data.username}'s stream`, // this will be the default name of the stream  
+          }
+        }
       }
     });
   }
