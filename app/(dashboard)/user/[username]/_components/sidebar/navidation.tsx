@@ -29,12 +29,12 @@ export const Navigation = () => {
     },
     {
       label: "Chat",
-      href: `/user/${user?.username}chat`, 
+      href: `/user/${user?.username}/chat`, 
       icon: MessageSquare,
     },
     {
       label: "Community",
-      href: `/user/${user?.username}community`, 
+      href: `/user/${user?.username}/community`, 
       icon: Users,
     },
   ];
