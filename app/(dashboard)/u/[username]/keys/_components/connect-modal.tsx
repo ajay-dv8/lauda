@@ -57,3 +57,5 @@ export const ConnectModal = () => {
     </Dialog>
   )
 }
+
+// RTMP ingress type is used for streaming apps eg OBS

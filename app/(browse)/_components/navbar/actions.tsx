@@ -29,7 +29,7 @@ export const Actions = async () => {
             asChild
           >
             {/* link to creator dashboard page */}
-            <Link href={`/user/${user.username}`}>
+            <Link href={`/u/${user.username}`}>
               <Clapperboard className="w-5 h-5 lg:mr-2"/>
 
               <span className="hidden lg:block">
